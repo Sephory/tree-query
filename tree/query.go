@@ -8,14 +8,10 @@ type Match struct {
 	Captures []Capture `json:"captures"`
 }
 
-func (m Match) ToMap() map[string][]string {
-	captures := make(map[string][]string, len(m.Captures))
+func (m Match) ToMap() map[string]string {
+	captures := make(map[string]string, len(m.Captures))
 	for _, c := range m.Captures {
-		if captures[c.Name] == nil {
-			captures[c.Name] = []string{c.Node.Text}
-		} else {
-			captures[c.Name] = append(captures[c.Name], c.Node.Text)
-		}
+		captures[c.Name] = c.Node.Text
 	}
 	return captures
 }
